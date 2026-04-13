@@ -1,0 +1,17 @@
+/dist
+/target
+
+.DS_Store
+lua/echo_native.*
+
+CLAUDE.md
+QWEN.md
+GEMINI.md
+GETTING_STARTED.md
+SPECS.md
+.claude/
+.crush/
+.serena/
+docs/superpowers/
+CONFIG_DEEP_DIVE.md
+*.log
