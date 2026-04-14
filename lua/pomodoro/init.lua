@@ -93,6 +93,7 @@ end
 local function handle_work_phase_complete()
   local state = store.read()
   if not state or state.phase ~= "work" then return end
+  if state.escalation then return end  -- already handled; guard against re-entry from poll loop
   if state.transitioning then
     if state.transition_started_at
         and (os.time() - state.transition_started_at) < STALE_TRANSITION_SECS then
@@ -268,7 +269,7 @@ local function on_poll()
       fresh.escalation = "dialog"
       fresh.escalation_deadline = nil
       store.write(fresh)
-      state = fresh  -- update local ref so dialog check sees "dialog" on this tick
+      state = fresh  -- must stay above `local esc = state.escalation` so the dialog check sees "dialog" on this tick
     end
   end
 
@@ -282,7 +283,7 @@ local function on_poll()
   end
 
   -- Phase completion detection
-  if state.phase == "work" and remaining <= 0 and not state.transitioning and not state.escalation then
+  if state.phase == "work" and remaining <= 0 and not state.transitioning then
     handle_work_phase_complete()
   elseif (state.phase == "short_break" or state.phase == "long_break")
       and remaining <= 0
