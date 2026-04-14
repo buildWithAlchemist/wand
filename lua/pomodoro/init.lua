@@ -268,6 +268,7 @@ local function on_poll()
       fresh.escalation = "dialog"
       fresh.escalation_deadline = nil
       store.write(fresh)
+      state = fresh  -- update local ref so dialog check sees "dialog" on this tick
     end
   end
 
@@ -281,7 +282,7 @@ local function on_poll()
   end
 
   -- Phase completion detection
-  if state.phase == "work" and remaining <= 0 and not state.transitioning then
+  if state.phase == "work" and remaining <= 0 and not state.transitioning and not state.escalation then
     handle_work_phase_complete()
   elseif (state.phase == "short_break" or state.phase == "long_break")
       and remaining <= 0

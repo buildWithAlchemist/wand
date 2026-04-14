@@ -58,7 +58,10 @@ keymap("n", "<Esc>", ":noh<CR>", { noremap = true, silent = true, desc = "Clear 
 
 -- Better save and quit
 keymap("n", "<C-s>", save.smart_save, { noremap = true, silent = true, desc = "Smart save" })
-keymap("i", "<C-s>", function() save.smart_save() vim.cmd('startinsert') end, { noremap = true, silent = true, desc = "Smart save" })
+keymap("i", "<C-s>", function()
+	save.smart_save()
+	vim.cmd("startinsert")
+end, { noremap = true, silent = true, desc = "Smart save" })
 keymap("n", "<leader>qq", ":q<CR>", { noremap = true, silent = true, desc = "[Q]uit window" })
 keymap("n", "<leader>Q", ":qa!<CR>", { noremap = true, silent = true, desc = "[Q]uit all (force)" })
 
@@ -75,10 +78,18 @@ keymap("n", "<leader><S-Tab>", ":tabp<CR>", { noremap = true, silent = true, des
 
 -- Theme switching (under <leader>u for UI)
 -- Uses Lua functions to defer-require themes, avoiding fragile command load order
-keymap("n", "<leader>us", function() require("utils.themes").switch_theme(vim.fn.input("Theme: ")) end, { noremap = true, silent = true, desc = "[U]I Theme [S]witch" })
-keymap("n", "<leader>uN", function() require("utils.themes").next_theme() end, { noremap = true, silent = true, desc = "[U]I Theme [N]ext" })
-keymap("n", "<leader>uP", function() require("utils.themes").prev_theme() end, { noremap = true, silent = true, desc = "[U]I Theme [P]revious" })
-keymap("n", "<leader>uc", function() require("utils.themes").show_current() end, { noremap = true, silent = true, desc = "[U]I Theme [C]urrent" })
+keymap("n", "<leader>us", function()
+	require("utils.themes").switch_theme(vim.fn.input("Theme: "))
+end, { noremap = true, silent = true, desc = "[U]I Theme [S]witch" })
+keymap("n", "<leader>uN", function()
+	require("utils.themes").next_theme()
+end, { noremap = true, silent = true, desc = "[U]I Theme [N]ext" })
+keymap("n", "<leader>uP", function()
+	require("utils.themes").prev_theme()
+end, { noremap = true, silent = true, desc = "[U]I Theme [P]revious" })
+keymap("n", "<leader>uc", function()
+	require("utils.themes").show_current()
+end, { noremap = true, silent = true, desc = "[U]I Theme [C]urrent" })
 
 -- Quick fix list
 keymap("n", "<leader>co", ":copen<CR>", { noremap = true, silent = true, desc = "Quickfix [O]pen" })
@@ -91,8 +102,12 @@ keymap("n", "]l", ":lnext<CR>", { noremap = true, silent = true, desc = "Next lo
 keymap("n", "[l", ":lprev<CR>", { noremap = true, silent = true, desc = "Previous location" })
 
 -- Diagnostic keymaps (LSP)
-keymap("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, { noremap = true, silent = true, desc = "Previous diagnostic" })
-keymap("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end, { noremap = true, silent = true, desc = "Next diagnostic" })
+keymap("n", "[d", function()
+	vim.diagnostic.jump({ count = -1 })
+end, { noremap = true, silent = true, desc = "Previous diagnostic" })
+keymap("n", "]d", function()
+	vim.diagnostic.jump({ count = 1 })
+end, { noremap = true, silent = true, desc = "Next diagnostic" })
 keymap("n", "<leader>xf", vim.diagnostic.open_float, { noremap = true, silent = true, desc = "Diagnostic [F]loat" })
 keymap("n", "<leader>xl", vim.diagnostic.setloclist, { noremap = true, silent = true, desc = "Diagnostic [L]ist" })
 keymap("n", "<leader>xq", vim.diagnostic.setqflist, { noremap = true, silent = true, desc = "Diagnostic [Q]uickfix" })

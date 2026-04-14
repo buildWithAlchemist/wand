@@ -1,4 +1,4 @@
-# 🚀 Mad Engineer Neovim [BETA]
+# 🚀 Wand nvim [BETA]
 
 <p align="center">
   <img src="https://img.shields.io/badge/Mad%20Engineer-Neovim-00d4ff?style=for-the-badge&logo=neovim&logoColor=white" />
