@@ -290,18 +290,4 @@ return {
       })
     end,
   },
-
-  -- Kulala: HTTP client for .http files
-  {
-    "mistweaverco/kulala.nvim",
-    ft = "http",
-    keys = {
-      { "<localleader>r", function() require("kulala").run() end,              ft = "http", desc = "Run HTTP request" },
-      { "<localleader>a", function() require("kulala").run_all() end,          ft = "http", desc = "Run all HTTP requests" },
-      { "<localleader>e", function() require("kulala").set_selected_env() end, ft = "http", desc = "Select HTTP environment" },
-    },
-    config = function()
-      require("kulala").setup({})
-    end,
-  },
 }
